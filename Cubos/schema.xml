@@ -1,0 +1,586 @@
+<Schema name="ValeCard">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Estabelecimento" caption="Estabelecimento">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_ESTABELECIMENTO">
+      <Table name="DW_DM_ESTABELECIMENTO" schema="BI">
+      </Table>
+      <Level name="GrupoEconomico" visible="true" column="NM_GRUPO_ECONOMICO" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Grupo Econ&#244;mico">
+      </Level>
+      <Level name="Estabelecimento" visible="true" column="NM_ESTABELECIMENTO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Estabelecimento">
+      </Level>
+      <Level name="Contrato" visible="true" column="NR_CONTRATO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Contrato do Estabelecimento">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="EstabalecimentoSituacao" visible="true" hasAll="true" primaryKey="TK_ESTABELECIMENTO" caption="Estabelecimento (Situa&#231;&#227;o)">
+      <Table name="DW_DM_ESTABELECIMENTO" schema="BI">
+      </Table>
+      <Level name="Situacao" visible="true" column="NM_STATUS" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Situa&#231;&#227;o do Estabelecimento">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Motorista" caption="Motorista">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_MOTORISTA">
+      <Table name="DW_DM_MOTORISTA" schema="BI">
+      </Table>
+      <Level name="CargoMotorista" visible="true" column="CARGO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Cargo do Motorista">
+      </Level>
+      <Level name="NomeMotorista" visible="true" column="NOME" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Nome do Motorista">
+      </Level>
+      <Level name="MatriculaMotorista" visible="true" column="MATRICULA" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Matr&#237;cula do Motorista">
+      </Level>
+      <Level name="CPFMotorista" visible="true" column="CPF" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="CPF do Motorista">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Membro" caption="Membro">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_MEMBER">
+      <Table name="DW_DM_MEMBER" schema="BI">
+      </Table>
+      <Level name="AprovaClienteCancelado" visible="true" column="APROVA_OS_CLIENTE_CANCELADO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Aprova os Clientes Cancelados?">
+      </Level>
+      <Level name="Dominio" visible="true" column="NM_DOMINIO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Dom&#237;nio">
+      </Level>
+      <Level name="Nome" visible="true" column="NM_MEMBER" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Nome">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="ResponsavelFrota" caption="Respons&#225;vel da Frota">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_RESPONSAVEL_FROTA">
+      <Table name="DW_DM_FRT_RESPONSAVEL" schema="BI">
+      </Table>
+      <Level name="NomeGestor" visible="true" column="NM_GESTOR" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Nome do Gestor">
+      </Level>
+      <Level name="CodigoCliente" visible="true" column="COD_CLIENTE" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="C&#243;digo do Cliente">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="TransacaoNegada" caption="Transa&#231;&#227;o Negada">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_TRANSACAO_NEGADA">
+      <Table name="DW_DM_FRT_TRANS_NEGADA" schema="BI">
+      </Table>
+      <Level name="Negado" visible="true" column="NEGADO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Transa&#231;&#227;o Negada?">
+      </Level>
+      <Level name="Motivo" visible="true" column="MOTIVO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Motivo Transa&#231;&#227;o Negada">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="BinarioOLD" caption="Bin&#225;rio">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" caption="Bin&#225;rio">
+      <Table name="DW_DM_BINARIO" schema="BI">
+      </Table>
+      <Level name="Abreviacao" visible="true" column="ABREVIACAO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Abrevia&#231;&#227;o">
+      </Level>
+      <Level name="SimNao" visible="true" column="BINARIO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Sim/N&#227;o">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Veiculo" caption="Ve&#237;culo">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_VEICULO">
+      <Table name="DW_DM_VEICULO" schema="BI">
+      </Table>
+      <Level name="TipoVeiculo" visible="true" column="NM_TIPO_VEICULO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Tipo de Ve&#237;culo">
+      </Level>
+      <Level name="Placa" visible="true" column="NM_PLACA" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Placa">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="VeiculoFrota" visible="true" hasAll="true" primaryKey="TK_VEICULO" caption="Ve&#237;culo (Frota)">
+      <Table name="DW_DM_VEICULO">
+      </Table>
+      <Level name="Frota" visible="true" column="NR_FROTA" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Frota">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="DataOld" caption="Data">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_DATA">
+      <Table name="DW_DM_DATA" schema="BI">
+      </Table>
+      <Level name="Data" visible="true" column="DT_DATA" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Data">
+      </Level>
+      <Level name="NomeData" visible="true" column="NM_DATA" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Nome da Data">
+      </Level>
+      <Level name="DiaSemana" visible="true" column="NM_DIA_DA_SEMANA" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Dia da Semana">
+      </Level>
+      <Level name="Mes" visible="true" column="NM_MES" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="M&#234;s">
+      </Level>
+      <Level name="Trimestre" visible="true" column="NM_TRIMESTRE" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Trimestre">
+      </Level>
+      <Level name="Ano" visible="true" column="NR_ANO" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Ano">
+      </Level>
+      <Level name="NumeroDiaSemana" visible="true" column="NR_DIA_DA_SEMANA" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="N&#250;mero Dia da Semana">
+      </Level>
+      <Level name="NumeroDiaAno" visible="true" column="NR_DIA_DO_ANO" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="N&#250;mero Dia do Ano">
+      </Level>
+      <Level name="NumeroDia Mes" visible="true" column="NR_DIA_DO_MES" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="N&#250;mero Dia do M&#234;s">
+      </Level>
+      <Level name="NumeroMes" visible="true" column="NR_MES" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="N&#250;mero do M&#234;s">
+      </Level>
+      <Level name="QuantidadeDiaMes" visible="true" column="NR_QTD_DIAS_NO_MES" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Quantidade de Dias no M&#234;s">
+      </Level>
+      <Level name="NumeroSemanaAno" visible="true" column="NR_SEMANA_DO_ANO" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="N&#250;mero Semana do Ano">
+      </Level>
+      <Level name="NumeroSemanaMes" visible="true" column="NR_SEMANA_DO_MES" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="N&#250;mero Semana do M&#234;s">
+      </Level>
+      <Level name="NumeroTrimestre" visible="true" column="NR_TRIMESTRE" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="N&#250;mero do Trimestre">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Data" caption="Data">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_DATA">
+      <Table name="DW_DM_DATA" schema="BI">
+      </Table>
+      <Level name="Ano" visible="true" column="NR_ANO" type="Numeric" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never" caption="Ano">
+      </Level>
+      <Level name="Trimestre" visible="true" column="NM_TRIMESTRE" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never" caption="Trimestre">
+      </Level>
+      <Level name="Mes" visible="true" column="NM_MES" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never" caption="M&#234;s">
+      </Level>
+      <Level name="NumeroDiaMes" visible="true" column="NR_DIA_DO_MES" type="Numeric" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never" caption="Dia">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="DiaSemana" visible="true" hasAll="true" primaryKey="TK_DATA" caption="Dia da Semana">
+      <Table name="DW_DM_DATA">
+      </Table>
+      <Level name="DiaSemana" visible="true" column="NM_DIA_DA_SEMANA" ordinalColumn="NR_DIA_DA_SEMANA" type="String" uniqueMembers="false" levelType="TimeUndefined" hideMemberIf="Never" caption="Dia da Semana">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="FormaControle" caption="Forma de Controle">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_FORMA_CONTROLE">
+      <Table name="DW_DM_FORMA_CONTROLE" schema="BI">
+      </Table>
+      <Level name="Sigla" visible="true" column="SIGLA" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Sigla (Forma de Controle)">
+      </Level>
+      <Level name="Descricao" visible="true" column="DESCRICAO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Descri&#231;&#227;o (Forma de Controle)">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Fabricante" caption="Fabricante">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_FABRICANTE">
+      <Table name="DW_DM_MNT_FABRICANTE" schema="BI">
+      </Table>
+      <Level name="NomeFabricante" visible="true" table="DW_DM_MNT_FABRICANTE" column="NM_FABRICANTE" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Nome do Fabricante">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="ItemManutencao" caption="Item de Manuten&#231;&#227;o">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_ITEM">
+      <Table name="DW_DM_MNT_ITEM" schema="BI">
+      </Table>
+      <Level name="NomeGrupoServicoItem" visible="true" table="DW_DM_MNT_ITEM" column="NM_GRUPO_SERVICO_ITEM" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Grupo de Servi&#231;o do Item">
+      </Level>
+      <Level name="NomeItem" visible="true" table="DW_DM_MNT_ITEM" column="NM_ITEM" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Nome do Item">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="ServicoManutencao" caption="Servi&#231;o de Manuten&#231;&#227;o">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_SERVICO">
+      <Table name="DW_DM_MNT_SERVICO" schema="BI">
+      </Table>
+      <Level name="NomeGrupoServico" visible="true" table="DW_DM_MNT_SERVICO" column="NM_GRUPO_SERVICO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Grupo do Servi&#231;o">
+      </Level>
+      <Level name="NomeServico" visible="true" table="DW_DM_MNT_SERVICO" column="NM_SERVICO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Nome do Servi&#231;o">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="ClasseProduto" caption="Classe do Produto">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_CLASSE_PRODUTO">
+      <Table name="DW_DM_MNT_CLASSE_PRODUTO" schema="BI">
+      </Table>
+      <Level name="NomeClasseProduto" visible="true" table="DW_DM_MNT_CLASSE_PRODUTO" column="NM_CLASSE_PRODUTO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Nome da Classe do Produto">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Cliente" caption="Cliente">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_CLIENTE">
+      <Table name="DW_DM_CLIENTE" schema="BI">
+      </Table>
+      <Level name="GrupoEconomico" visible="true" table="DW_DM_CLIENTE" column="NM_GRUPO_ECONOMICO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Grupo Econ&#244;mico do Cliente">
+      </Level>
+      <Level name="EmpresaColigada" visible="true" table="DW_DM_CLIENTE" column="NM_EMPRESA_COLIGADA" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Empresa Coligada do Cliente">
+      </Level>
+      <Level name="TipoCliente" visible="true" table="DW_DM_CLIENTE" column="TIPO_CLIENTE" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Tipo de Cliente">
+      </Level>
+      <Level name="NomeCliente" visible="true" table="DW_DM_CLIENTE" column="NM_NOME" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Nome do Cliente">
+      </Level>
+      <Level name="CNPJ" visible="true" table="DW_DM_CLIENTE" column="NR_CNPJ" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="CNPJ do Cliente">
+      </Level>
+      <Level name="Contrato" visible="true" table="DW_DM_CLIENTE" column="NR_CONTRATO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Contrato do Cliente">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="ClienteSituacao" visible="true" hasAll="true" primaryKey="TK_CLIENTE" caption="Cliente (Situa&#231;&#227;o)">
+      <Table name="DW_DM_CLIENTE">
+      </Table>
+      <Level name="Situacao" visible="true" column="NM_SITUACAO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Situa&#231;&#227;o do Cliente">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="TipoManutencao" caption="Tipo de Manuten&#231;&#227;o">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_TIPO_MANUTENCAO">
+      <Table name="DW_DM_TIPO_MANUTENCAO" schema="BI">
+      </Table>
+      <Level name="TipoManutencao" visible="true" table="DW_DM_TIPO_MANUTENCAO" column="TIPO_MANUTENCAO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Tipo de Manuten&#231;&#227;o">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="SituacaoPlanoManutencao" caption="Situa&#231;&#227;o do Plano de Manuten&#231;&#227;o">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_SITUACAO_PL_MNT">
+      <Table name="DW_DM_SITUACAO_PL_MNT" schema="BI">
+      </Table>
+      <Level name="SituacaoPlanoManutencao" visible="true" table="DW_DM_SITUACAO_PL_MNT" column="DESCRICAO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Situa&#231;&#227;o do Plano de Manuten&#231;&#227;o">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Produto" caption="Produto">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_PRODUTO">
+      <Table name="DW_DM_PRODUTO" schema="BI">
+      </Table>
+      <Level name="Familia" visible="true" table="DW_DM_PRODUTO" column="NM_FAMILIA" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Fam&#237;lia do Produto">
+      </Level>
+      <Level name="NomeProduto" visible="true" table="DW_DM_PRODUTO" column="NM_PRODUTO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Produto">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="PlanoManutencao" caption="Plano de Manuten&#231;&#227;o">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_PLANO_MANUTENCAO">
+      <Table name="DW_DM_PLANO_MANUTENCAO" schema="BI">
+      </Table>
+      <Level name="PlanoManutencao" visible="true" table="DW_DM_PLANO_MANUTENCAO" column="DESCRICAO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Plano de Manuten&#231;&#227;o">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="SituacaoManutencaoOLD" caption="Situa&#231;&#227;o da Manuten&#231;&#227;o">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_SITUACAO">
+      <Table name="DW_DM_MNT_SITUACAO" schema="BI">
+      </Table>
+      <Level name="Situacao" visible="true" table="DW_DM_MNT_SITUACAO" column="NM_SITUACAO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Situa&#231;&#227;o da Manuten&#231;&#227;o">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="MeioCaptura" caption="Meio de Captura">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_MEIO_CAPTURA">
+      <Table name="DW_DM_MEIO_CAPTURA" schema="BI">
+      </Table>
+      <Level name="MeioCaptura" visible="true" table="DW_DM_MEIO_CAPTURA" column="NM_MEIO_CAPTURA" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Meio de Captura">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="MotivoCancelamento" caption="Motivo do Cancelamento">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_MOTIVO_CANC">
+      <Table name="DW_DM_MNT_MOTIVO_CANC" schema="BI">
+      </Table>
+      <Level name="MotivoCancelamento" visible="true" table="DW_DM_MNT_MOTIVO_CANC" column="NM_MOTIVO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Motivo do Cancelamento">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Hora" caption="Hora">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_HORA">
+      <Table name="DW_DM_HORA" schema="BI">
+      </Table>
+      <Level name="Periodo" visible="true" table="DW_DM_HORA" column="NM_PERIODO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Per&#237;odo">
+      </Level>
+      <Level name="Hora" visible="true" table="DW_DM_HORA" column="NM_HORA" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Hora">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="SituacaoItemOrcamento" caption="Situa&#231;&#227;o Item Or&#231;amento">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_SITUACAO">
+      <Table name="DW_DM_MNT_SITUACAO_ITEM_ORC" schema="BI">
+      </Table>
+      <Level name="Situacao" visible="true" column="NM_SITUACAO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Situa&#231;&#227;o Item Or&#231;amento">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="SituacaoOrcamento" caption="Situa&#231;&#227;o Or&#231;amento">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_SITUACAO">
+      <Table name="DW_DM_MNT_SITUACAO_ORCAMENTO" schema="BI">
+      </Table>
+      <Level name="Situacao" visible="true" column="NM_SITUACAO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Situa&#231;&#227;o Or&#231;amento">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="SituacaoOS" caption="Situa&#231;&#227;o Ordem de Servi&#231;o">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_SITUACAO">
+      <Table name="DW_DM_MNT_SITUACAO_OS" schema="BI">
+      </Table>
+      <Level name="Situacao" visible="true" column="NM_SITUACAO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Situa&#231;&#227;o Ordem de Servi&#231;o">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="SituacaoRegEntrada" caption="Situa&#231;&#227;o Registro de Entrada">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_SITUACAO">
+      <Table name="DW_DM_MNT_SITUACAO_REG_ENTRADA" schema="BI">
+      </Table>
+      <Level name="Situacao" visible="true" column="NM_SITUACAO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Situa&#231;&#227;o Registro de Entrada">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="Frota" visible="true" cache="true" enabled="true">
+    <Table name="DW_FT_FROTA" schema="BI">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="TK_BI_ANOMALIA_REGULARIZADA" highCardinality="false" name="AnomaliaRegularizada" caption="Anomalia Regularizada">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="ID">
+        <Table name="DW_DM_BINARIO" schema="BI">
+        </Table>
+        <Level name="AnomaliaRegularizada" visible="true" column="BINARIO" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Anomalia Regularizada?">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="TK_BI_TRANS_ANOMALA" highCardinality="false" name="TransacaoAnomala" caption="Transa&#231;&#227;o Anomala">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="ID">
+        <Table name="DW_DM_BINARIO" schema="BI">
+        </Table>
+        <Level name="TransacaoAnomala" visible="true" table="DW_DM_BINARIO" column="BINARIO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Transa&#231;&#227;o An&#244;mala?">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <DimensionUsage source="Veiculo" name="Veiculo" caption="Ve&#237;culo" visible="true" foreignKey="TK_VEICULO" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Membro" name="Responsavel" caption="Respons&#225;vel" visible="true" foreignKey="TK_MEMBER" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Estabelecimento" name="Estabelecimento" caption="Estabelecimento" visible="true" foreignKey="TK_ESTABELECIMENTO" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Motorista" name="Motorista" caption="Motorista" visible="true" foreignKey="TK_MOTORISTA" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Data" name="Data" caption="Data" visible="true" foreignKey="TK_DATA" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="TransacaoNegada" name="TransacaoNegada" visible="true" foreignKey="TK_TRANSACAO_NEGADA" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Cliente" name="Cliente" caption="Cliente" visible="true" foreignKey="TK_CLIENTE" highCardinality="false">
+    </DimensionUsage>
+    <Dimension type="StandardDimension" visible="true" foreignKey="TK_FRT_PRODUTOS" name="Produtos" caption="Produtos">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_FRT_PRODUTOS">
+        <Table name="DW_DM_FRT_PRODUTOS" schema="BI">
+        </Table>
+        <Level name="CategoriaProduto" visible="true" table="DW_DM_FRT_PRODUTOS" column="PRODUTO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Categoria do Produto">
+        </Level>
+        <Level name="Produto" visible="true" table="DW_DM_FRT_PRODUTOS" column="DESCRICAO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Produto">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <DimensionUsage source="ServicoManutencao" name="ServicoManutencao" visible="true" foreignKey="TK_SERVICO">
+    </DimensionUsage>
+    <Measure name="Distancia" column="DISTANCIA" datatype="Numeric" aggregator="sum" caption="Dist&#226;ncia" visible="true">
+    </Measure>
+    <Measure name="ValorTotal" column="NM_VALOR_TOTAL" datatype="Numeric" aggregator="sum" caption="Valor Total Autoriza&#231;&#245;es" visible="true">
+    </Measure>
+    <Measure name="QuantidadeVeiculos" column="TK_VEICULO" datatype="Numeric" aggregator="distinct-count" caption="Qtde de Ve&#237;culos" visible="true">
+    </Measure>
+    <Measure name="QuantidadeMotoristas" column="TK_MOTORISTA" datatype="Numeric" aggregator="distinct-count" caption="Qtde de Motoristas" visible="true">
+    </Measure>
+    <Measure name="QuantidadeTransacoes" column="ID_CONTROLE_FROTA" datatype="Numeric" aggregator="distinct-count" caption="Qtde de Transa&#231;&#245;es" visible="true">
+    </Measure>
+    <Measure name="QuantidadeLitros" column="QUANTIDADE" datatype="Numeric" aggregator="sum" caption="Qtde de Litros" visible="true">
+    </Measure>
+    <Measure name="DistanciaFun" column="DISTANCIA_FUN" datatype="Numeric" aggregator="sum" caption="Dist&#226;ncia Calculada" visible="true">
+    </Measure>
+    <Measure name="ValorUnitario" column="NM_VALOR_UNITARIO" datatype="Numeric" aggregator="distinct-count" caption="Valor Unit&#225;rio" visible="true">
+    </Measure>
+    <Measure name="QuantidadeCartoes" column="NUMERO_CARTAO" datatype="Numeric" aggregator="distinct-count" caption="Qtde de Cart&#245;es" visible="true">
+    </Measure>
+    <Measure name="Rendimento" column="RENDIMENTO" datatype="Numeric" aggregator="sum" caption="Rendimento" visible="true">
+    </Measure>
+    <Measure name="RendimentoCalculado" column="RENDIMENTO_CALCULADO" datatype="Numeric" aggregator="sum" caption="Rendimento Calculado" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="ItemOrcamento" visible="true" cache="true" enabled="true">
+    <Table name="DW_FT_ITEM_ORCAMENTO" schema="BI">
+    </Table>
+    <DimensionUsage source="ItemManutencao" name="Item" visible="true" foreignKey="TK_ITEM" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="ServicoManutencao" name="Servico" visible="true" foreignKey="TK_SERVICO" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="ClasseProduto" name="ClasseProduto" visible="true" foreignKey="TK_CLASSE_PRODUTO" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Fabricante" name="Fabricante" visible="true" foreignKey="TK_FABRICANTE" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="SituacaoItemOrcamento" name="SitucaoItemOrcamento" caption="Situa&#231;&#227;o Item Or&#231;amento" visible="true" foreignKey="TK_SIT_ITEM_ORC" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="SituacaoOrcamento" name="SituacaoOrcamento" caption="Situa&#231;&#227;o Or&#231;amento" visible="true" foreignKey="TK_SIT_ORC" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Cliente" name="Cliente" visible="true" foreignKey="TK_CLIENTE" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Estabelecimento" name="Estabelecimento" visible="true" foreignKey="TK_ESTABELECIMENTO" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Membro" name="Aprovador" caption="Aprovador" visible="true" foreignKey="TK_APROVADOR" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="TipoManutencao" name="TipoManutencao" visible="true" foreignKey="TK_TIPO_MANUTENCAO" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="MotivoCancelamento" name="MotivoCancelamento" visible="true" foreignKey="TK_MOTIVO_CANC" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Data" name="DataCadItemOrcamento" caption="Cadastro de Item Or&#231;amento" visible="false" foreignKey="TK_DT_CAD_ITEM_ORC" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Data" name="DataCancelOrcamento" caption="Cancelamento Or&#231;amento" visible="true" foreignKey="TK_DT_CANC_ORC" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Data" name="DataCriacaoOrcamento" caption="Cria&#231;&#227;o Or&#231;amento" visible="true" foreignKey="TK_DT_CRIACAO_ORC" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Data" name="DataAprovacaoOrcamento" caption="Aprova&#231;&#227;o Or&#231;amento" visible="true" foreignKey="TK_DT_APROVACAO" highCardinality="false">
+    </DimensionUsage>
+    <Dimension type="StandardDimension" visible="false" foreignKey="ID_ORCAMENTO" highCardinality="false" name="IdOrcamento" caption="Id Or&#231;amento">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="ID_ORCAMENTO">
+        <Level name="IdOrcamento" visible="true" table="DW_FT_ITEM_ORCAMENTO" column="ID_ORCAMENTO" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Id Or&#231;amento">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="false" foreignKey="ID_ITEM_ORCAMENTO" highCardinality="false" name="IdItemOrcamento" caption="Id Item Or&#231;amento">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="ID_ITEM_ORCAMENTO">
+        <Level name="IdItemOrcamento" visible="true" table="DW_FT_ITEM_ORCAMENTO" column="ID_ITEM_ORCAMENTO" type="Numeric" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Id Or&#231;amento">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="NR_ORCAMENTO" highCardinality="false" name="NumeroOrcamento" caption="N&#250;mero do Or&#231;amento">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="NR_ORCAMENTO">
+        <Level name="NumeroOrcamento" visible="true" table="DW_FT_ITEM_ORCAMENTO" column="NR_ORCAMENTO" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="N&#250;mero do Or&#231;amento">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="NR_FABRICANTE" highCardinality="false" name="NumeroFabricante" caption="N&#250;mero do Fabricante">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="NR_FABRICANTE">
+        <Level name="NumeroFabricante" visible="true" table="DW_FT_ITEM_ORCAMENTO" column="NR_FABRICANTE" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="N&#250;mero do Fabricante">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="GARANTIA_ITEM" highCardinality="false" name="GarantiaItem" caption="Item tem Garantia">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="GARANTIA_ITEM">
+        <Level name="GarantiaItem" visible="true" table="DW_FT_ITEM_ORCAMENTO" column="GARANTIA_SERVICO" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Item tem Garantia?">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="GARANTIA_SERVICO" highCardinality="false" name="GarantiaServico" caption="Servi&#231;o tem Garantia">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="GARANTIA_SERVICO">
+        <Level name="GarantiaServico" visible="true" table="DW_FT_ITEM_ORCAMENTO" column="GARANTIA_SERVICO" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Servi&#231;o tem Garantia?">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="QuantidadeItens" column="QTD_ITEM" datatype="Numeric" aggregator="sum" caption="Qtde de Itens" visible="true">
+    </Measure>
+    <Measure name="QuantidadeServicos" column="QTD_SERVICO" datatype="Numeric" aggregator="sum" caption="Qtde de Servi&#231;os" visible="true">
+    </Measure>
+    <Measure name="MediaValorUnitItem" column="VLR_UNI_ITEM" datatype="Numeric" aggregator="avg" caption="Valor M&#233;dio Unit&#225;rio do Item" visible="true">
+    </Measure>
+    <Measure name="MediaValorUnitNegItem" column="VLR_UNI_NEG_ITEM" datatype="Numeric" aggregator="avg" caption="Valor M&#233;dio Unit&#225;rio Negociado do Item" visible="true">
+    </Measure>
+    <Measure name="ValorTotalItem" column="VLR_COTADO_ITEM" datatype="Numeric" aggregator="sum" caption="Valor Total do Item" visible="true">
+    </Measure>
+    <Measure name="MediaDescontoItem" column="PERC_DESCONTO_ITEM" datatype="Numeric" aggregator="avg" caption="Percentual M&#233;dio de Desconto do Item" visible="true">
+    </Measure>
+    <Measure name="MediaHodometroGarantiaItem" column="HODOMETRO_GARANTIA_ITEM" datatype="Numeric" aggregator="avg" caption="Valor M&#233;dio Hodometro da Garantia do Item" visible="true">
+    </Measure>
+    <Measure name="MediaValorUnitServico" column="VLR_UNI_SERVICO" datatype="Numeric" aggregator="avg" caption="Valor M&#233;dio Unit&#225;rio do Servi&#231;o" visible="true">
+    </Measure>
+    <Measure name="ValorUnitNegServico" column="VLR_UNI_NEG_SERVICO" datatype="Numeric" aggregator="avg" caption="Valor M&#233;dio Unit&#225;rio Negociado do Servi&#231;o" visible="true">
+    </Measure>
+    <Measure name="ValorTotalServico" column="VLR_COTADO_SERVICO" datatype="Numeric" aggregator="avg" caption="Valor Total do Servi&#231;o" visible="true">
+    </Measure>
+    <Measure name="MediaDescontoServico" column="PERC_DESCONTO_SERVICO" datatype="Numeric" aggregator="avg" caption="Percentual M&#233;dio de Desconto do Servi&#231;o" visible="true">
+    </Measure>
+    <Measure name="MediaHodometroGarantiaServico" column="HODOMETRO_GARANTIA_SERVICO" datatype="Numeric" aggregator="avg" caption="Valor M&#233;dio Hodometro da Garantia do Servi&#231;o" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="ItemPlanoManutencao" visible="true" cache="true" enabled="true">
+    <Table name="DW_FT_ITEM_PLANO_MNT" schema="BI">
+    </Table>
+    <DimensionUsage source="ItemManutencao" name="Item" visible="true" foreignKey="TK_ITEM" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="ServicoManutencao" name="Servico" visible="true" foreignKey="TK_SERVICO" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Cliente" name="Cliente" visible="true" foreignKey="TK_CLIENTE" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="TipoManutencao" name="TipoManutencao" visible="true" foreignKey="TK_TIPO_MANUTENCAO" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="PlanoManutencao" name="PlanoManutencao" visible="true" foreignKey="TK_PLANO_MANUTENCAO" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Data" name="DataInicioVigencia" caption="Data de In&#237;cio da Vig&#234;ncia" visible="true" foreignKey="TK_DATA_INICIO_VIEGENCIA" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Data" name="DataFinalVigencia" caption="Data Final da Vig&#234;ncia" visible="true" foreignKey="TK_DATA_FINAL_VIEGENCIA" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="FormaControle" name="FormaControle" visible="true" foreignKey="TK_FORMA_CONTROLE" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Veiculo" name="Veiculo" visible="true" foreignKey="TK_VEICULO" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="SituacaoPlanoManutencao" name="SituacaoPlanoManutencao" visible="true" foreignKey="TK_SITUACAO_PL_MNT" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Data" name="DataAviso" caption="Data de Aviso" visible="true" foreignKey="TK_DATA_AVISO" highCardinality="false">
+    </DimensionUsage>
+    <Dimension type="StandardDimension" visible="false" foreignKey="QTD_ITEM" highCardinality="false" name="QuantidadeItens" caption="Quantidade de Itens">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="QTD_ITEM">
+        <Level name="QuantidadeItens" visible="true" column="QTD_ITEM" type="Numeric" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Quantidade de Itens">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="false" foreignKey="QTD_SERVICO" highCardinality="false" name="QuantidadeServicos" caption="Quantidade de Servi&#231;os">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="QTD_SERVICO">
+        <Level name="QuantidadeServicos" visible="true" column="QTD_SERVICO" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Quantidade de Servi&#231;os">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="false" foreignKey="HODOMETRO_CONTROLE" highCardinality="false" name="HodometroControle" caption="Hod&#244;metro de Controle">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="HODOMETRO_CONTROLE">
+        <Level name="HodometroControle" visible="true" column="HODOMETRO_CONTROLE" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Hod&#244;metro de Controle">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="PERIODO_CONTROLE" highCardinality="false" name="PeriodoControle" caption="Per&#237;odo de Controle">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="PERIODO_CONTROLE">
+        <Level name="PeriodoControle" visible="true" column="PERIODO_CONTROLE" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Per&#237;odo de Controle">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="false" foreignKey="PERCENTUAL_AVISO" highCardinality="false" name="PercentualAviso" caption="Percentual de Aviso">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="PERCENTUAL_AVISO">
+        <Level name="PercentualAviso" visible="true" column="PERCENTUAL_AVISO" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Percentual de Aviso">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="NM_STATUS" highCardinality="false" name="Status" caption=" Situa&#231;&#227;o Plano de Manunte&#231;&#227;o">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="NM_STATUS">
+        <Level name="Status" visible="true" column="NM_STATUS" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption=" Situa&#231;&#227;o Plano de Manunte&#231;&#227;o">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="false" foreignKey="HODOMETRO_AVISO" highCardinality="false" name="HodometroAviso" caption="Hod&#244;metro Aviso">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="HODOMETRO_AVISO">
+        <Level name="HodometroAviso" visible="true" column="HODOMETRO_AVISO" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Hod&#244;metro Aviso">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="false" foreignKey="ID_ITEM_PLANO_MNT" highCardinality="false" name="ItemPlanoManutencao" caption="Item Plano de Manuten&#231;&#227;o">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="ID_ITEM_PLANO_MNT">
+        <Level name="ItemPlanoManutencao" visible="true" column="ID_ITEM_PLANO_MNT" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Item Plano Manuten&#231;&#227;o">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="QuantidadeItens" column="QTD_ITEM" datatype="Numeric" aggregator="sum" caption="Qtde de Itens" visible="true">
+    </Measure>
+    <Measure name="QuantidadeServicos" column="QTD_SERVICO" datatype="Numeric" aggregator="sum" caption="Qtde de Servi&#231;os" visible="true">
+    </Measure>
+    <Measure name="QuantidadeClientes" column="TK_CLIENTE" datatype="Integer" aggregator="distinct-count" caption="Qtde de Clientes" visible="true">
+    </Measure>
+    <Measure name="QuantidadeVeiculos" column="TK_VEICULO" datatype="Integer" aggregator="distinct-count" caption="Qtde de Ve&#237;culos" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="OrdemServico" caption="Ordem de Servi&#231;o" visible="true" cache="true" enabled="true">
+    <Table name="DW_FT_ORDEM_SERVICO" schema="BI">
+    </Table>
+    <DimensionUsage source="Motorista" name="Motorista" visible="true" foreignKey="TK_MOTORISTA" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="SituacaoOS" name="SituacaoOS" caption="Situa&#231;&#227;o Ordem de Servi&#231;o" visible="true" foreignKey="TK_SITUACAO" highCardinality="false">
+    </DimensionUsage>
+    <Dimension type="StandardDimension" visible="true" foreignKey="NUMERO_NF_PECAS" highCardinality="false" name="NumeroNFPeca" caption="Nota Fiscal de Pe&#231;as">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="NumeroNFPeca" visible="true" column="NUMERO_NF_PECAS" type="Integer" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Nota Fiscal de Pe&#231;as">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="NUMERO_NF_SERVICOS" highCardinality="false" name="NuneroNFServicos" caption="Nota Fiscal de Servi&#231;os">
+      <Hierarchy visible="true" hasAll="true">
+        <Level name="NuneroNFServicos" visible="true" column="NUMERO_NF_SERVICOS" type="Integer" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Nota Fiscal de Servi&#231;os">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <DimensionUsage source="Data" name="DataRetirada" caption="Data de Retirada" visible="true" foreignKey="TK_DATA_RETIRADA" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Data" name="DataFechamento" caption="Data do Fechamento" visible="true" foreignKey="TK_DATA_FECHAMENTO" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="QTDServico" column="QTD_SERVICO" datatype="Numeric" aggregator="sum" caption="Qtde de Servi&#231;os" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
