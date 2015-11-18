@@ -417,8 +417,8 @@
     <Measure name="RendimentoCalculado" column="RENDIMENTO_CALCULADO" datatype="Numeric" aggregator="sum" caption="Rendimento Calculado" visible="true">
     </Measure>
   </Cube>
-  <Cube name="ItemOrcamento" visible="true" cache="true" enabled="true">
-    <Table name="DW_FT_ITEM_ORCAMENTO" schema="BI">
+  <Cube name="OrcamentoManutencao" visible="true" cache="true" enabled="true">
+    <Table name="DW_FT_ORCAMENTO_MNT" schema="BI">
     </Table>
     <DimensionUsage source="ItemManutencao" name="Item" visible="true" foreignKey="TK_ITEM" highCardinality="false">
     </DimensionUsage>
@@ -452,37 +452,63 @@
     </DimensionUsage>
     <Dimension type="StandardDimension" visible="false" foreignKey="ID_ORCAMENTO" highCardinality="false" name="IdOrcamento" caption="Id Or&#231;amento">
       <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="ID_ORCAMENTO">
-        <Level name="IdOrcamento" visible="true" table="DW_FT_ITEM_ORCAMENTO" column="ID_ORCAMENTO" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Id Or&#231;amento">
+        <Level name="IdOrcamento" visible="true" column="ID_ORCAMENTO" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Id Or&#231;amento">
         </Level>
       </Hierarchy>
     </Dimension>
     <Dimension type="StandardDimension" visible="false" foreignKey="ID_ITEM_ORCAMENTO" highCardinality="false" name="IdItemOrcamento" caption="Id Item Or&#231;amento">
       <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="ID_ITEM_ORCAMENTO">
-        <Level name="IdItemOrcamento" visible="true" table="DW_FT_ITEM_ORCAMENTO" column="ID_ITEM_ORCAMENTO" type="Numeric" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Id Or&#231;amento">
+        <Level name="IdItemOrcamento" visible="true" column="ID_ITEM_ORCAMENTO" type="Numeric" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Id Or&#231;amento">
         </Level>
       </Hierarchy>
     </Dimension>
     <Dimension type="StandardDimension" visible="true" foreignKey="NR_ORCAMENTO" highCardinality="false" name="NumeroOrcamento" caption="N&#250;mero do Or&#231;amento">
       <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="NR_ORCAMENTO">
-        <Level name="NumeroOrcamento" visible="true" table="DW_FT_ITEM_ORCAMENTO" column="NR_ORCAMENTO" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="N&#250;mero do Or&#231;amento">
+        <Level name="NumeroOrcamento" visible="true" column="NR_ORCAMENTO" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="N&#250;mero do Or&#231;amento">
         </Level>
       </Hierarchy>
     </Dimension>
     <Dimension type="StandardDimension" visible="true" foreignKey="NR_FABRICANTE" highCardinality="false" name="NumeroFabricante" caption="N&#250;mero do Fabricante">
       <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="NR_FABRICANTE">
-        <Level name="NumeroFabricante" visible="true" table="DW_FT_ITEM_ORCAMENTO" column="NR_FABRICANTE" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="N&#250;mero do Fabricante">
+        <Level name="NumeroFabricante" visible="true" column="NR_FABRICANTE" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="N&#250;mero do Fabricante">
         </Level>
       </Hierarchy>
     </Dimension>
     <Dimension type="StandardDimension" visible="true" foreignKey="GARANTIA_ITEM" highCardinality="false" name="GarantiaItem" caption="Item tem Garantia">
       <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="GARANTIA_ITEM">
-        <Level name="GarantiaItem" visible="true" table="DW_FT_ITEM_ORCAMENTO" column="GARANTIA_SERVICO" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Item tem Garantia?">
+        <Level name="GarantiaItem" visible="true" column="GARANTIA_SERVICO" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Item tem Garantia?">
         </Level>
       </Hierarchy>
     </Dimension>
     <Dimension type="StandardDimension" visible="true" foreignKey="GARANTIA_SERVICO" highCardinality="false" name="GarantiaServico" caption="Servi&#231;o tem Garantia">
       <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="GARANTIA_SERVICO">
-        <Level name="GarantiaServico" visible="true" table="DW_FT_ITEM_ORCAMENTO" column="GARANTIA_SERVICO" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Servi&#231;o tem Garantia?">
+        <Level name="GarantiaServico" visible="true" column="GARANTIA_SERVICO" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Servi&#231;o tem Garantia?">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="false" name="IdOrdemServico" caption="Id Ordem de Servi&#231;o">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos">
+        <Level name="IdOrdemServico" visible="true" column="ID_ORDEM_SERVICO" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Id Ordem de Servi&#231;o">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <DimensionUsage source="SituacaoOS" name="SituacaoOS" visible="true" foreignKey="TK_SIT_ORDEM_SERIVCO">
+    </DimensionUsage>
+    <DimensionUsage source="Motorista" name="MotoristaRetirada" caption="Motorista de Retirada da OS" visible="true" foreignKey="TK_MOTORISTA_RET_OS">
+    </DimensionUsage>
+    <DimensionUsage source="Data" name="DataFechamentoOS" caption="Fechamento da Ordem de Servi&#231;o" visible="true" foreignKey="TK_DT_FECHAMENTO_OS">
+    </DimensionUsage>
+    <DimensionUsage source="Data" name="DataRetiradaOS" caption="Retirada da OS" visible="true" foreignKey="TK_DT_RETIRADA_OS">
+    </DimensionUsage>
+    <Dimension type="StandardDimension" visible="true" name="NFPecas" caption="NF Pe&#231;as">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos">
+        <Level name="NFPecas" visible="true" column="NR_NF_PECAS" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="NF Pe&#231;as">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" name="NFServicos" caption="NF Servi&#231;os">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos">
+        <Level name="NFServicos" visible="true" column="NR_NF_SERVICOS" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="NF Servi&#231;os">
         </Level>
       </Hierarchy>
     </Dimension>
