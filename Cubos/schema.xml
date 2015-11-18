@@ -133,7 +133,7 @@
       </Level>
       <Level name="Mes" visible="true" column="NM_MES" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never" caption="M&#234;s">
       </Level>
-      <Level name="NumeroDiaMes" visible="true" column="NR_DIA_DO_MES" type="Numeric" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never" caption="Dia">
+      <Level name="Dia" visible="true" column="NR_DIA_DO_MES" type="Numeric" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never" caption="Dia">
       </Level>
     </Hierarchy>
     <Hierarchy name="DiaSemana" visible="true" hasAll="true" primaryKey="TK_DATA" caption="Dia da Semana">
@@ -313,6 +313,42 @@
       </Level>
     </Hierarchy>
   </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="SetorComercial" caption="Setor Comercial">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_CLIENTE">
+      <Table name="DW_DM_CLIENTE">
+      </Table>
+      <Level name="Regional" visible="true" column="NM_REGIONAL" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Filial" visible="true" column="NM_FILIAL" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="Sucursal" visible="true" column="NM_SUCURSAL" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="LocalizacaoCliente" caption="Localiza&#231;&#227;o">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_CLIENTE">
+      <Table name="DW_DM_CLIENTE">
+      </Table>
+      <Level name="UF" visible="true" column="NM_UF" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="CanalVendasCliente" caption="Canal de Vendas">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_CLIENTE">
+      <Table name="DW_DM_CLIENTE">
+      </Table>
+      <Level name="Canal de Vendas" visible="true" column="CANAL_VENDAS" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="GrupoProduto" caption="Grupo do Produto">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_PRODUTO">
+      <Table name="DW_DM_PRODUTO">
+      </Table>
+      <Level name="Grupo do Produto" visible="true" column="NM_GRUPO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
   <Cube name="Frota" visible="true" cache="true" enabled="true">
     <Table name="DW_FT_FROTA" schema="BI">
     </Table>
@@ -346,7 +382,7 @@
     </DimensionUsage>
     <DimensionUsage source="Cliente" name="Cliente" caption="Cliente" visible="true" foreignKey="TK_CLIENTE" highCardinality="false">
     </DimensionUsage>
-    <Dimension type="StandardDimension" visible="true" foreignKey="TK_FRT_PRODUTOS" name="Produtos" caption="Produtos">
+    <Dimension type="StandardDimension" visible="true" foreignKey="TK_FRT_PRODUTOS" highCardinality="false" name="Produtos" caption="Produtos">
       <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_FRT_PRODUTOS">
         <Table name="DW_DM_FRT_PRODUTOS" schema="BI">
         </Table>
@@ -356,7 +392,7 @@
         </Level>
       </Hierarchy>
     </Dimension>
-    <DimensionUsage source="ServicoManutencao" name="ServicoManutencao" visible="true" foreignKey="TK_SERVICO">
+    <DimensionUsage source="ServicoManutencao" name="ServicoManutencao" visible="true" foreignKey="TK_SERVICO" highCardinality="false">
     </DimensionUsage>
     <Measure name="Distancia" column="DISTANCIA" datatype="Numeric" aggregator="sum" caption="Dist&#226;ncia" visible="true">
     </Measure>
@@ -582,5 +618,47 @@
     </DimensionUsage>
     <Measure name="QTDServico" column="QTD_SERVICO" datatype="Numeric" aggregator="sum" caption="Qtde de Servi&#231;os" visible="true">
     </Measure>
+  </Cube>
+  <Cube name="Clientes" visible="true" cache="true" enabled="true">
+    <Table name="DW_FT_CLIENTES">
+    </Table>
+    <DimensionUsage source="Cliente" name="Cliente" visible="true" foreignKey="TK_CLIENTE" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Data" name="Data" visible="true" foreignKey="TK_DATA" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Produto" name="Produto" visible="true" foreignKey="TK_PRODUTO" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="SetorComercial" name="SetorComercial" visible="true" foreignKey="TK_CLIENTE" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="LocalizacaoCliente" name="LocalizacaoCliente" visible="true" foreignKey="TK_CLIENTE" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="CanalVendasCliente" name="CanalVendasCliente" visible="true" foreignKey="TK_CLIENTE" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="GrupoProduto" name="GrupoProduto" visible="true" foreignKey="TK_PRODUTO" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="VGT" column="VALOR" datatype="Numeric" formatString="R$ #,##0.00" aggregator="sum" caption="VGT" visible="true">
+    </Measure>
+    <Measure name="QtdeUsuariosMovim" column="QTDE_USUARIOS_MOVIMENTANDO" datatype="Numeric" formatString="#" aggregator="sum" caption="Qtde de Usu&#225;rios Movimentando" visible="true">
+    </Measure>
+    <Measure name="QtdeUserAtivoTMP" column="QTDE_USUARIOS_ATIVO" datatype="Numeric" formatString="#" aggregator="sum" visible="false">
+    </Measure>
+    <Measure name="QtdeUserBloqueadosTMP" column="QTDE_USUARIOS_BLOQ" datatype="Numeric" formatString="#" aggregator="sum" visible="false">
+    </Measure>
+    <Measure name="QtdeUserAnaliseTMP" column="QTDE_USUARIO_ANALISE" datatype="Numeric" formatString="#" aggregator="sum" visible="false">
+    </Measure>
+    <Measure name="QtdeUserCanceladosTMP" column="QTDE_USUARIO_CANC" datatype="Numeric" formatString="#" aggregator="sum" visible="false">
+    </Measure>
+    <Measure name="QtdeUserInativosTMP" column="QTDE_USUARIO_INATIVOS" datatype="Numeric" formatString="#" aggregator="sum" visible="false">
+    </Measure>
+    <CalculatedMember name="QtdeUserAtivo" formatString="#" caption="Qtde de Usu&#225;rios Ativos" formula="Sum(Tail(order(Filter(Descendants([Data].CurrentMember, [Data].[Dia]), not isEmpty([Measures].[QtdeUserAtivoTMP])),[Measures].[QtdeUserAtivoTMP],ASC),1).item(0),[Measures].[QtdeUserAtivoTMP]) " dimension="Measures" visible="true">
+    </CalculatedMember>
+    <CalculatedMember name="QtdeUserBloqueados" formatString="#" caption="Qtde de Usu&#225;rios Bloqueados" formula="Sum(Tail(order(Filter(Descendants([Data].CurrentMember, [Data].[Dia]), not isEmpty([Measures].[QtdeUserBloqueadosTMP])),[Measures].[QtdeUserBloqueadosTMP],ASC),1).item(0),[Measures].[QtdeUserBloqueadosTMP])  " dimension="Measures" visible="true">
+    </CalculatedMember>
+    <CalculatedMember name="QtdeUserAnalise" formatString="#" caption="Qtde de Usu&#225;rios Em An&#225;lise" formula="Sum(Tail(order(Filter(Descendants([Data].CurrentMember, [Data].[Dia]), not isEmpty([Measures].[QtdeUserAnaliseTMP])),[Measures].[QtdeUserAnaliseTMP],ASC),1).item(0),[Measures].[QtdeUserAnaliseTMP])  " dimension="Measures" visible="true">
+    </CalculatedMember>
+    <CalculatedMember name="QtdeUserCancelados" formatString="#" caption="Qtde de Usu&#225;rios Cancelados" formula="Sum(Tail(order(Filter(Descendants([Data].CurrentMember, [Data].[Dia]), not isEmpty([Measures].[QtdeUserCanceladosTMP])),[Measures].[QtdeUserCanceladosTMP],ASC),1).item(0),[Measures].[QtdeUserCanceladosTMP])  " dimension="Measures" visible="true">
+    </CalculatedMember>
+    <CalculatedMember name="QtdeUserInativos" formatString="#" caption="Qtde de Usu&#225;rios Inativos" formula="Sum(Tail(order(Filter(Descendants([Data].CurrentMember, [Data].[Dia]), not isEmpty([Measures].[QtdeUserInativosTMP])),[Measures].[QtdeUserInativosTMP],ASC),1).item(0),[Measures].[QtdeUserInativosTMP])  " dimension="Measures" visible="true">
+    </CalculatedMember>
   </Cube>
 </Schema>
