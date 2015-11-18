@@ -536,18 +536,6 @@
     </DimensionUsage>
     <DimensionUsage source="Data" name="DataAviso" caption="Data de Aviso" visible="true" foreignKey="TK_DATA_AVISO" highCardinality="false">
     </DimensionUsage>
-    <Dimension type="StandardDimension" visible="false" foreignKey="QTD_ITEM" highCardinality="false" name="QuantidadeItens" caption="Quantidade de Itens">
-      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="QTD_ITEM">
-        <Level name="QuantidadeItens" visible="true" column="QTD_ITEM" type="Numeric" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Quantidade de Itens">
-        </Level>
-      </Hierarchy>
-    </Dimension>
-    <Dimension type="StandardDimension" visible="false" foreignKey="QTD_SERVICO" highCardinality="false" name="QuantidadeServicos" caption="Quantidade de Servi&#231;os">
-      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="QTD_SERVICO">
-        <Level name="QuantidadeServicos" visible="true" column="QTD_SERVICO" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Quantidade de Servi&#231;os">
-        </Level>
-      </Hierarchy>
-    </Dimension>
     <Dimension type="StandardDimension" visible="false" foreignKey="HODOMETRO_CONTROLE" highCardinality="false" name="HodometroControle" caption="Hod&#244;metro de Controle">
       <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="HODOMETRO_CONTROLE">
         <Level name="HodometroControle" visible="true" column="HODOMETRO_CONTROLE" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Hod&#244;metro de Controle">
@@ -578,19 +566,17 @@
         </Level>
       </Hierarchy>
     </Dimension>
-    <Dimension type="StandardDimension" visible="false" foreignKey="ID_ITEM_PLANO_MNT" highCardinality="false" name="ItemPlanoManutencao" caption="Item Plano de Manuten&#231;&#227;o">
-      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="ID_ITEM_PLANO_MNT">
-        <Level name="ItemPlanoManutencao" visible="true" column="ID_ITEM_PLANO_MNT" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Item Plano Manuten&#231;&#227;o">
-        </Level>
-      </Hierarchy>
-    </Dimension>
-    <Measure name="QuantidadeItens" column="QTD_ITEM" datatype="Numeric" aggregator="sum" caption="Qtde de Itens" visible="true">
+    <Measure name="QtdeTotalItens" column="QTD_ITEM" datatype="Numeric" aggregator="sum" caption="Qtde Total de Itens" visible="true">
     </Measure>
-    <Measure name="QuantidadeServicos" column="QTD_SERVICO" datatype="Numeric" aggregator="sum" caption="Qtde de Servi&#231;os" visible="true">
+    <Measure name="QtdeTotalServicos" column="QTD_SERVICO" datatype="Numeric" aggregator="sum" caption="Qtde Total de Servi&#231;os" visible="true">
     </Measure>
-    <Measure name="QuantidadeClientes" column="TK_CLIENTE" datatype="Integer" aggregator="distinct-count" caption="Qtde de Clientes" visible="true">
+    <Measure name="QtdeClientes" column="TK_CLIENTE" datatype="Integer" aggregator="distinct-count" caption="Qtde de Clientes" visible="true">
     </Measure>
-    <Measure name="QuantidadeVeiculos" column="TK_VEICULO" datatype="Integer" aggregator="distinct-count" caption="Qtde de Ve&#237;culos" visible="true">
+    <Measure name="QtdeVeiculos" column="TK_VEICULO" datatype="Integer" aggregator="distinct-count" caption="Qtde de Ve&#237;culos" visible="true">
+    </Measure>
+    <Measure name="QtdeItensDistintos" column="TK_ITEM" datatype="Integer" aggregator="distinct-count" caption="Qtde de Itens Distintos" visible="true">
+    </Measure>
+    <Measure name="QtdeServicosDistintos" column="TK_SERVICO" datatype="Integer" aggregator="distinct-count" caption="Qtde de Servi&#231;os Distintos" visible="true">
     </Measure>
   </Cube>
   <Cube name="OrdemServico" caption="Ordem de Servi&#231;o" visible="true" cache="true" enabled="true">
