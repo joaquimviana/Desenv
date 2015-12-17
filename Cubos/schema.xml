@@ -349,6 +349,40 @@
       </Level>
     </Hierarchy>
   </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Rota" caption="Rota">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_ROTA">
+      <Table name="DW_DM_ROTA" schema="BI">
+      </Table>
+      <Level name="Descricao" visible="true" column="CHAVE_DESCRICAO_ROTA" nameColumn="DESCRICAO" ordinalColumn="DESCRICAO" type="String" internalType="long" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Descri&#231;&#227;o">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="RotaConsorcio" visible="true" hasAll="true" primaryKey="TK_ROTA" caption="Rota (Cons&#243;rcio)">
+      <Table name="DW_DM_ROTA" schema="BI" alias="">
+      </Table>
+      <Level name="NomeConsorcio" visible="true" column="NM_CONSORCIO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Nome do Cons&#243;rcio">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="RotaMacroRegiao" visible="true" hasAll="true" primaryKey="TK_ROTA" caption="Rota (Macro-Regi&#227;o)">
+      <Table name="DW_DM_ROTA" schema="BI" alias="">
+      </Table>
+      <Level name="MacroRegiao" visible="true" column="MACRO_REGIAO" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Macro-Regi&#227;o">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Localidade" caption="Localidade">
+    <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="TK_TAB_LOCALIDADE">
+      <Table name="DW_DM_TAB_LOCALIDADE" schema="BI">
+      </Table>
+      <Level name="Cidade" visible="true" column="NM_CIDADE" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Cidade">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="LocalidadeUF" visible="true" hasAll="true" primaryKey="TK_TAB_LOCALIDADE" caption="Localidade (UF)">
+      <Table name="DW_DM_TAB_LOCALIDADE" schema="BI" alias="">
+      </Table>
+      <Level name="UF" visible="true" column="SG_UF" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="UF">
+      </Level>
+    </Hierarchy>
+  </Dimension>
   <Cube name="Frota" visible="true" cache="true" enabled="true">
     <Table name="DW_FT_FROTA" schema="BI">
     </Table>
@@ -486,27 +520,27 @@
         </Level>
       </Hierarchy>
     </Dimension>
-    <Dimension type="StandardDimension" visible="false" name="IdOrdemServico" caption="Id Ordem de Servi&#231;o">
+    <Dimension type="StandardDimension" visible="false" highCardinality="false" name="IdOrdemServico" caption="Id Ordem de Servi&#231;o">
       <Hierarchy visible="true" hasAll="true" allMemberName="Todos">
         <Level name="IdOrdemServico" visible="true" column="ID_ORDEM_SERVICO" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Id Ordem de Servi&#231;o">
         </Level>
       </Hierarchy>
     </Dimension>
-    <DimensionUsage source="SituacaoOS" name="SituacaoOS" visible="true" foreignKey="TK_SIT_ORDEM_SERIVCO">
+    <DimensionUsage source="SituacaoOS" name="SituacaoOS" visible="true" foreignKey="TK_SIT_ORDEM_SERIVCO" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Motorista" name="MotoristaRetirada" caption="Motorista de Retirada da OS" visible="true" foreignKey="TK_MOTORISTA_RET_OS">
+    <DimensionUsage source="Motorista" name="MotoristaRetirada" caption="Motorista de Retirada da OS" visible="true" foreignKey="TK_MOTORISTA_RET_OS" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Data" name="DataFechamentoOS" caption="Fechamento da Ordem de Servi&#231;o" visible="true" foreignKey="TK_DT_FECHAMENTO_OS">
+    <DimensionUsage source="Data" name="DataFechamentoOS" caption="Fechamento da Ordem de Servi&#231;o" visible="true" foreignKey="TK_DT_FECHAMENTO_OS" highCardinality="false">
     </DimensionUsage>
-    <DimensionUsage source="Data" name="DataRetiradaOS" caption="Retirada da OS" visible="true" foreignKey="TK_DT_RETIRADA_OS">
+    <DimensionUsage source="Data" name="DataRetiradaOS" caption="Retirada da OS" visible="true" foreignKey="TK_DT_RETIRADA_OS" highCardinality="false">
     </DimensionUsage>
-    <Dimension type="StandardDimension" visible="true" name="NFPecas" caption="NF Pe&#231;as">
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="NFPecas" caption="NF Pe&#231;as">
       <Hierarchy visible="true" hasAll="true" allMemberName="Todos">
         <Level name="NFPecas" visible="true" column="NR_NF_PECAS" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="NF Pe&#231;as">
         </Level>
       </Hierarchy>
     </Dimension>
-    <Dimension type="StandardDimension" visible="true" name="NFServicos" caption="NF Servi&#231;os">
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="NFServicos" caption="NF Servi&#231;os">
       <Hierarchy visible="true" hasAll="true" allMemberName="Todos">
         <Level name="NFServicos" visible="true" column="NR_NF_SERVICOS" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="NF Servi&#231;os">
         </Level>
@@ -671,6 +705,66 @@
     <CalculatedMember name="QtdeUserCancelados" formatString="#" caption="Qtde de Usu&#225;rios Cancelados" formula="Sum(Tail(order(Filter(Descendants([Data].CurrentMember, [Data].[Dia]), not isEmpty([Measures].[QtdeUserCanceladosTMP])),[Measures].[QtdeUserCanceladosTMP],ASC),1).item(0),[Measures].[QtdeUserCanceladosTMP])  " dimension="Measures" visible="true">
     </CalculatedMember>
     <CalculatedMember name="QtdeUserInativos" formatString="#" caption="Qtde de Usu&#225;rios Inativos" formula="Sum(Tail(order(Filter(Descendants([Data].CurrentMember, [Data].[Dia]), not isEmpty([Measures].[QtdeUserInativosTMP])),[Measures].[QtdeUserInativosTMP],ASC),1).item(0),[Measures].[QtdeUserInativosTMP])  " dimension="Measures" visible="true">
+    </CalculatedMember>
+  </Cube>
+  <Cube name="SETS" visible="true" cache="true" enabled="true">
+    <Table name="DW_FT_SETS" schema="BI">
+    </Table>
+    <DimensionUsage source="Rota" name="RotaIda" caption="Rota Ida" visible="true" foreignKey="TK_ROTA_IDA" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Rota" name="RotaVolta" caption="Rota Volta" visible="true" foreignKey="TK_ROTA_VOLTA" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Localidade" name="Localidade" caption="Localidade" visible="true" foreignKey="TK_TAB_LOCALIDADE" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Data" name="Data" caption="Data" visible="true" foreignKey="TK_DATA" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Hora" name="Hora" caption="Hora" visible="true" foreignKey="TK_HORA" highCardinality="false">
+    </DimensionUsage>
+    <Dimension type="StandardDimension" visible="true" foreignKey="VIAGEM_ID" highCardinality="false" name="NumeroViagem" caption="N&#250;mero da Viagem">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="VIAGEM_ID">
+        <Level name="NumeroViagem" visible="true" column="VIAGEM_ID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="N&#250;mero da Viagem">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="VIAGEM_IDA_ID" highCardinality="false" name="NumeroViagemIda" caption="N&#250;mero da Viagem Ida">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="VIAGEM_IDA_ID">
+        <Level name="NumeroViagemIda" visible="true" column="VIAGEM_IDA_ID" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="N&#250;mero da Viagem Ida">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="STATUS" highCardinality="false" name="Status" caption="Status">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos" primaryKey="STATUS">
+        <Level name="Status" visible="true" column="STATUS" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Status">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="ORDEM" highCardinality="false" name="Ordem" caption="Ordem">
+      <Hierarchy visible="true" hasAll="true" allMemberName="Todos">
+        <Level name="Ordem" visible="true" column="ORDEM" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Ordem">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="QtdeViagensOfertadas" column="AGENDA_VIAGEM_ID" datatype="Integer" aggregator="distinct-count" caption="Qtde de Viagens Ofertadas" visible="true">
+    </Measure>
+    <Measure name="QtdeAssentosAgendados" column="QTDE_ASSENTOS_AGENDADOS" datatype="Integer" aggregator="sum" caption="Qtde de Assentos Agendados" visible="true">
+    </Measure>
+    <Measure name="QtdeAssentosDisponiveis" column="QTDE_ASSENTOS_TOTAL" datatype="Integer" aggregator="sum" caption="Qtde de Assentos Dispon&#237;veis" visible="true">
+    </Measure>
+    <Measure name="QtdePassageirosFaltosos" column="QTDE_FALTOSOS" datatype="Integer" aggregator="sum" caption="Qtde de Passageiros Faltosos" visible="true">
+    </Measure>
+    <Measure name="QtdePassageirosTransportados" column="TOTAL_TRANSPORTADOS" datatype="Integer" aggregator="sum" caption="Qtde de Passageiros Transportados" visible="true">
+    </Measure>
+    <CalculatedMember name="QtdeViagensRealizadas" caption="Qtde de Viagens Realizadas" formula="([Status].[F], [Measures].[QtdeViagensOfertadas])" dimension="Measures" visible="true">
+    </CalculatedMember>
+    <CalculatedMember name="PercentualViagensRealizadas" formatString="0.00%" caption="Percentual de Viagens Realizadas" formula="([Measures].[QtdeViagensRealizadas] / [Measures].[QtdeViagensOfertadas])" dimension="Measures" visible="true">
+    </CalculatedMember>
+    <CalculatedMember name="PercentualAssentosAgendados" formatString="0.00%" caption="Percentual de Assentos Agendados" formula="([Measures].[QtdeAssentosAgendados] / [Measures].[QtdeAssentosDisponiveis])" dimension="Measures" visible="true">
+    </CalculatedMember>
+    <CalculatedMember name="QtdeAssentosNaoAgendados" caption="Qtde de Assentos N&#227;o Agendados" formula="([Measures].[QtdeAssentosDisponiveis] - [Measures].[QtdeAssentosAgendados])" dimension="Measures" visible="true">
+    </CalculatedMember>
+    <CalculatedMember name="PercentualPassageirosFaltosos" formatString="0.00%" caption="Percentual de Passageiros Faltosos" formula="([Measures].[QtdePassageirosFaltosos] / [Measures].[QtdeAssentosAgendados])" dimension="Measures" visible="true">
+    </CalculatedMember>
+    <CalculatedMember name="PercentualPassageirosTransportados" formatString="0.00%" caption="Percentual de Passageiros Transportados" formula="([Measures].[QtdePassageirosTransportados] / [Measures].[QtdeAssentosDisponiveis])" dimension="Measures" visible="true">
     </CalculatedMember>
   </Cube>
 </Schema>
